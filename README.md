@@ -1,6 +1,6 @@
 # sqs-request
 A docker image to build a SQS queue listener. Written in TypeScript, made to use with docker.
-SQS queue processor with node, via squiss, which processes each message as a request.
+SQS queue processor with node, ts-squiss, which processes each message as a request.
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/marcusyoda/sqs-request)
 ![Libraries.io dependency status for latest release, scoped npm package](https://img.shields.io/librariesio/release/npm/sqs-request) ![npm](https://img.shields.io/npm/dy/sqs-request)
