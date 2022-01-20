@@ -48,6 +48,7 @@ if (bodyFormat === 'json' || bodyFormat === 'plain') {
 const poller = new Squiss(SquissOptions);
 
 poller.start()
+  .then(()=> Print('POLLER-START (INICIADO)').ok())
   .catch((err: any) => {
     Print(`POLLER-START - ${err.message}, Falha iniciando pooler.`).err();
   });
