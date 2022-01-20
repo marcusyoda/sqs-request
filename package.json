@@ -10,7 +10,9 @@
   "scripts": {
     "install-lock": "yarn install --frozen-lockfile",
     "build": "tsc -p tsconfig.json",
+    "build-docker": "docker build -t marcusyoda/sqs-request:latest .",
     "deploy": "yarn build && yarn publish",
+    "deploy-docker": "docker push marcusyoda/sqs-request:latest",
     "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test",
     "lint": "./node_modules/.bin/eslint src/*.ts index.ts",
     "test": "mocha -r ts-node/register tests/*.test.ts"

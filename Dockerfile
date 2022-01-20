@@ -1,6 +1,13 @@
 FROM node:16-alpine
 
-ADD ./node_modules /node_modules
-ADD ./lib /lib
+WORKDIR /app
 
-CMD ["node" , "/lib/main.js"]
+ADD ./src /app/src
+ADD ./package.json /app/package.json
+ADD ./yarn.lock /app/yarn.lock
+
+RUN yarn install-lock
+
+RUN rm -rf /app/src
+
+CMD ["node" , "/app/lib/index.js"]

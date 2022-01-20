@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  sqs:
+    image: graze/sqs-local
+    container_name: "fila_sqs"
+    restart: unless-stopped
+    volumes:
+      - ./docker/sqs/elasticmq.conf:/elasticmq.conf
+    ports:
+      - 9324:9324
+
+  sqs-request:
+    image: node:16-alpine
+    container_name: "processador_sqs"
+    build:
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    environment:
+      - AWS_ACCESS_KEY_ID=fakeAccessKey
+      - AWS_SECRET_ACCESS_KEY=fakeSecretKey
+      - SQS_REGION=sa-east-1
+      - QUEUE_NAME=request_single
+      - MAX_IN_FLIGHT=1
+      - BATCH_SIZE=1
+      - POOL_INTERVAL_MS=200
+      - DELAY_SECS=0
+      - "AWS_ENDPOINT=http://sqs:9324"
