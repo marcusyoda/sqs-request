@@ -1,10 +1,13 @@
-import AWS from 'aws-sdk';
+import AWS, {AWSError} from 'aws-sdk';
 import {Squiss} from 'squiss-ts';
 import {Print} from 'ts-print';
 import {ProcessEnv} from './index.ds';
 import {ISquissOptions} from 'squiss-ts/dist/Types';
 import {onMessage} from './onMessage';
 import {GetObjectOutput} from 'aws-sdk/clients/s3';
+import {ConfigurationOptions} from 'aws-sdk/lib/config-base';
+import {ConfigurationServicePlaceholders} from 'aws-sdk/lib/config_service_placeholders';
+import {APIVersions} from 'aws-sdk/lib/config';
 
 const {
   AWS_ENDPOINT = '',
@@ -18,7 +21,7 @@ const {
   POOL_INTERVAL_MS = '0',
 }: ProcessEnv = process.env;
 
-const awsConfig = {
+const awsConfig: ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions & {[key: string]: any} = {
   accessKeyId: AWS_ACCESS_KEY_ID,
   secretAccessKey: AWS_SECRET_ACCESS_KEY,
   region: SQS_REGION,
@@ -60,7 +63,7 @@ poller.on('message', async (msg) => {
       s3.getObject({
         Bucket,
         Key,
-      }, (err, data: GetObjectOutput) => {
+      }, (err: AWSError, data: GetObjectOutput) => {
         if (err) {
           Print(`S3-REQUEST-GET ${err.message}`).err();
         } else {
@@ -74,7 +77,7 @@ poller.on('message', async (msg) => {
           s3.deleteObject({
             Bucket,
             Key,
-          }, (errDeleteS3) => {
+          }, (errDeleteS3: AWSError) => {
             if (errDeleteS3) {
               Print(`S3-REQUEST-DELETE ${errDeleteS3.message}`).err();
             }

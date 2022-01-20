@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "lib",
     "target": "es5",
-    "module": "node",
+    "module": "CommonJS",
     "lib": ["es2015"],
     "sourceMap": true,
     "strict": true,
