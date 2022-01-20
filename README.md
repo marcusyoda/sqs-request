@@ -23,6 +23,9 @@ SQS queue processor with node, ts-squiss, which processes each message as a requ
 ## WHO SHOULD USE:
 Any developer who needs to process a queue at SQS, very well configurable.
 
+## READY TO USE:
+https://hub.docker.com/r/marcusyoda/sqs-request
+
 ## GETTING STARTED:
 To use you need to build with docker...
 ```bash
