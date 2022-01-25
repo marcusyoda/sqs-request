@@ -20,7 +20,7 @@ services:
       - AWS_ACCESS_KEY_ID=fakeAccessKey
       - AWS_SECRET_ACCESS_KEY=fakeSecretKey
       - SQS_REGION=sa-east-1
-      - QUEUE_NAME=request_single
+      - QUEUE_NAME=exemplo_fila
       - MAX_IN_FLIGHT=1
       - BATCH_SIZE=1
       - POOL_INTERVAL_MS=200

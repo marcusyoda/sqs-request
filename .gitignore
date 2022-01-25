@@ -3,6 +3,7 @@
 .vscode
 node_modules
 dist
+lib
 nyc_output
 coverage
 .env.local
