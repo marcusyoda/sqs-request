@@ -21,7 +21,7 @@ const {
   POOL_INTERVAL_MS = '0',
 }: ProcessEnv = process.env;
 
-const awsConfig: ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions & {[key: string]: any} = {
+const awsConfig: ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions & { [key: string]: any } = {
   accessKeyId: AWS_ACCESS_KEY_ID,
   secretAccessKey: AWS_SECRET_ACCESS_KEY,
   region: SQS_REGION,
@@ -48,14 +48,15 @@ if (bodyFormat === 'json' || bodyFormat === 'plain') {
 const poller = new Squiss(SquissOptions);
 
 poller.start()
-  .then(()=> Print('POLLER-START (INICIADO)').ok())
+  .then(() => Print('POLLER-START (INICIADO)').ok())
   .catch((err: any) => {
     Print(`POLLER-START - ${err.message}, Falha iniciando pooler.`).err();
   });
 
 poller.on('message', async (msg) => {
   const req = msg.body;
-  if (req.s3Request) {
+  if (!req.s3Request) {
+    await onMessage(msg);
   } else {
     const Bucket = req?.s3Request?.bucket;
     const Key = req?.s3Request?.key;
@@ -64,7 +65,7 @@ poller.on('message', async (msg) => {
       s3.getObject({
         Bucket,
         Key,
-      }, (err: AWSError, data: GetObjectOutput) => {
+      }, async (err: AWSError, data: GetObjectOutput) => {
         if (err) {
           Print(`S3-REQUEST-GET ${err.message}`).err();
         } else {
@@ -74,7 +75,7 @@ poller.on('message', async (msg) => {
             headers: req.headers,
             path: req.path,
           };
-          onMessage(msg);
+          await onMessage(msg);
           s3.deleteObject({
             Bucket,
             Key,
