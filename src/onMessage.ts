@@ -5,7 +5,8 @@ import {IOptions, ProcessEnv} from './index.ds';
 const {
   API_URL = '',
   DATA_TYPE_POST = 'json',
-  PRINT_RESPONSE = 'false',
+  PRINT_HEADERS = '',
+  PRINT_RESPONSE = '',
 }: ProcessEnv = process.env;
 
 export const onMessage = async (msg: any) => {
@@ -34,22 +35,29 @@ export const onMessage = async (msg: any) => {
       return;
     }
 
-    const reasonHeader: string = response && response.headers && response.headers['x-message'] || '[]';
+    const reasonPhrase: string = response && response?.data?.reason_phrase || '-';
     const statusCode: number = response.status;
 
     const successCode: boolean = statusCode >= 200 && statusCode <= 299;
     const clientError: boolean = statusCode >= 400 && statusCode <= 499;
 
     if (successCode || clientError) {
-      Print(`REQUEST - ${reasonHeader} / Removendo a mensagem, o Request foi processado com sucesso`).ok();
-      msg.del();
+      Print(`REQUEST - ${reasonPhrase} / REMOVENDO a mensagem, o Request FOI processado com sucesso`).ok();
+      if (PRINT_HEADERS) {
+        // eslint-disable-next-line no-console
+        console.log('RESPONSE-HEADERS', response.headers);
+      }
+
       if (PRINT_RESPONSE) {
         // eslint-disable-next-line no-console
-        console.log('RESPONSE', response);
+        console.log('RESPONSE-DATA', response.data);
       }
-    }
 
-    msg.keep();
+      msg.del();
+    } else {
+      Print(`REQUEST - ${reasonPhrase} / MANTENDO a mensagem, o Request NÃO foi processado`).warn();
+      msg.keep();
+    }
   }).catch((err: AxiosError) => {
     Print(err.message || 'Falha ao identificar a razão [AXIOS-CATCH].').err();
     msg.keep();

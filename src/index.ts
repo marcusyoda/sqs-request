@@ -4,7 +4,6 @@ import {Print} from 'ts-print';
 import {ProcessEnv} from './index.ds';
 import {ISquissOptions} from 'squiss-ts/dist/Types';
 import {onMessage} from './onMessage';
-import {GetObjectOutput} from 'aws-sdk/clients/s3';
 import {ConfigurationOptions} from 'aws-sdk/lib/config-base';
 import {ConfigurationServicePlaceholders} from 'aws-sdk/lib/config_service_placeholders';
 import {APIVersions} from 'aws-sdk/lib/config';
@@ -15,11 +14,15 @@ const {
   AWS_SECRET_ACCESS_KEY = '',
   SQUISS_BODY_FORMAT = 'json',
   SQS_REGION = '',
+  QUEUE_URL = '',
   QUEUE_NAME = '',
   MAX_IN_FLIGHT = '100',
   BATCH_SIZE = '10',
   POOL_INTERVAL_MS = '0',
+  DEBUG_SQUISS = '',
 }: ProcessEnv = process.env;
+
+let queueUrl: string = QUEUE_NAME;
 
 const awsConfig: ConfigurationOptions & ConfigurationServicePlaceholders & APIVersions & { [key: string]: any } = {
   accessKeyId: AWS_ACCESS_KEY_ID,
@@ -28,17 +31,20 @@ const awsConfig: ConfigurationOptions & ConfigurationServicePlaceholders & APIVe
 };
 
 if (AWS_ENDPOINT !== '') {
+  queueUrl = `${QUEUE_URL}/queue/${QUEUE_NAME}`;
   awsConfig.endpoint = new AWS.Endpoint(AWS_ENDPOINT);
   AWS.config.update(awsConfig);
 }
 
 const SquissOptions: ISquissOptions = {
   awsConfig,
-  queueName: QUEUE_NAME,
+  queueUrl,
   maxInFlight: +MAX_IN_FLIGHT,
   receiveBatchSize: +BATCH_SIZE,
   activePollIntervalMs: +POOL_INTERVAL_MS,
 };
+
+if (DEBUG_SQUISS) console.log('SquissOptions', SquissOptions);
 
 const bodyFormat: string = SQUISS_BODY_FORMAT;
 if (bodyFormat === 'json' || bodyFormat === 'plain') {
@@ -65,7 +71,7 @@ poller.on('message', async (msg) => {
       s3.getObject({
         Bucket,
         Key,
-      }, async (err: AWSError, data: GetObjectOutput) => {
+      }, async (err, data) => {
         if (err) {
           Print(`S3-REQUEST-GET ${err.message}`).err();
         } else {

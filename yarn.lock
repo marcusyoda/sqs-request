@@ -2009,10 +2009,10 @@ ts-node@^10.4.0:
     make-error "^1.1.1"
     yn "3.1.1"
 
-ts-print@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/ts-print/-/ts-print-1.0.6.tgz#357a0389994a2e13e039a0056c99abb854f71fab"
-  integrity sha512-A9Penucvchs8vtENX18VmhbXTnmBy1Opm7Lp8ADOEbLJN5MT5EmqCGwh7F5+Lh4DQxTdxnLUXFgraCTp172EsQ==
+ts-print@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ts-print/-/ts-print-1.1.0.tgz#0dcf10ef52d2c92f1ce03c722ce79bfe7811f670"
+  integrity sha512-I6Dr7P2YeA9z45l9pFZKS4fc126cqaTzU5rXf0ZbB2MrXIS7mDmVBMS5uK9SYHvQuSe4ZsJplFTBNOVBLuyWQg==
 
 ts-type-guards@^0.7.0:
   version "0.7.0"
