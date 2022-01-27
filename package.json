@@ -1,7 +1,7 @@
 {
   "name": "sqs-request",
   "description": "A docker image to build a SQS queue listener. Written in TypeScript, made to use with docker.",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "license": "MIT",
   "author": "Marcus Yoda <marcusyoda13@gmail.com>",
   "repository": "https://github.com/marcusyoda/sqs-request.git",
@@ -45,6 +45,6 @@
     "aws-sdk": "^2.1060.0",
     "axios": "^0.25.0",
     "squiss-ts": "^4.2.1",
-    "ts-print": "^1.0.6"
+    "ts-print": "^1.1.0"
   }
 }
