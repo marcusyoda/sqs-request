@@ -42,7 +42,7 @@ export const onMessage = async (msg: any) => {
     const clientError: boolean = statusCode >= 400 && statusCode <= 499;
 
     if (successCode || clientError) {
-      Print(`REQUEST - ${reasonPhrase} / REMOVENDO a mensagem, o Request FOI processado com sucesso`).ok();
+      Print(`${reasonPhrase} / REMOVENDO a mensagem, o Request FOI processado com sucesso`).ok();
       if (PRINT_HEADERS) {
         // eslint-disable-next-line no-console
         console.log('RESPONSE-HEADERS', response.headers);
@@ -55,7 +55,7 @@ export const onMessage = async (msg: any) => {
 
       msg.del();
     } else {
-      Print(`REQUEST - ${reasonPhrase} / MANTENDO a mensagem, o Request NÃO foi processado`).warn();
+      Print(`${reasonPhrase} / MANTENDO a mensagem, o Request NÃO foi processado`).warn();
       msg.keep();
     }
   }).catch((err: AxiosError) => {
