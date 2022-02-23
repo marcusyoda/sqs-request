@@ -2011,9 +2011,9 @@ ts-node@^10.4.0:
     yn "3.1.1"
 
 ts-print@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ts-print/-/ts-print-1.1.0.tgz#0dcf10ef52d2c92f1ce03c722ce79bfe7811f670"
-  integrity sha512-I6Dr7P2YeA9z45l9pFZKS4fc126cqaTzU5rXf0ZbB2MrXIS7mDmVBMS5uK9SYHvQuSe4ZsJplFTBNOVBLuyWQg==
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/ts-print/-/ts-print-1.1.2.tgz#a1a0ec21958cea8c1b1fcb9dd570dcd8ac095a10"
+  integrity sha512-DQmS+G56PWNR6hC2xSCc9iPa+kKwukRRthJXt3qoqLHyipHa+vyudrjRK55SZComqKsoO/3h9eRz22US3HkbTw==
 
 ts-type-guards@^0.7.0:
   version "0.7.0"
