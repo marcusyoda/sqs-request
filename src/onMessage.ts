@@ -30,7 +30,7 @@ export const onMessage = async (msg: any) => {
 
   await axios(url, options).then((response: AxiosResponse<any>) => {
     if (!response) {
-      Print(`REQUEST Não retornou resposta, Falha ao identificar a razão'}`).err();
+      Print(`REQUEST sem retorno, Falha ao identificar o erro'}`).err();
       msg.keep();
       return;
     }
@@ -42,7 +42,7 @@ export const onMessage = async (msg: any) => {
     const clientError: boolean = statusCode >= 400 && statusCode <= 499;
 
     if (successCode || clientError) {
-      Print(`${reasonPhrase} / REMOVENDO a mensagem, o Request FOI processado com sucesso`).ok();
+      Print(`${reasonPhrase} / Removendo a mensagem, request processado!`).ok();
       if (PRINT_HEADERS) {
         // eslint-disable-next-line no-console
         console.log('RESPONSE-HEADERS', response.headers);
@@ -55,7 +55,7 @@ export const onMessage = async (msg: any) => {
 
       msg.del();
     } else {
-      Print(`${reasonPhrase} / MANTENDO a mensagem, o Request NÃO foi processado`).warn();
+      Print(`${reasonPhrase} / Mantendo a mensagem, falha processamento do request`).warn();
       msg.keep();
     }
   }).catch((err: AxiosError) => {
