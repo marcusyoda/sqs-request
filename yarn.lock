@@ -498,9 +498,9 @@ assertion-error@^1.1.0:
   integrity sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==
 
 aws-sdk@^2.1060.0, aws-sdk@^2.720.0:
-  version "2.1084.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1084.0.tgz#cfc0c87ed87989a75a6ef25db814cc529fde09ac"
-  integrity sha512-fhMjPRrrln8LhMZw17IyrzkVXCG6okFMrZzgIZN1h63WWGot65qcIvYfUn7YyHpYWMLBeND8MRfW6x6PIqJBdA==
+  version "2.1117.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1117.0.tgz#9565fbf39caebd51c7822ab78fb3c07876e811d4"
+  integrity sha512-MBSEiLLlj8ULr8na118m44M2VvTlkyaw13J3rcHOlMSbuB2DpXBZTs2dJylFWv2szaOOSsUTo8vmc+pRJHC+Aw==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
