@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.1060.0",
-    "axios": "^0.26.0",
+    "axios": "^0.27.1",
     "squiss-ts": "^4.2.1",
     "ts-print": "^1.1.2"
   }
